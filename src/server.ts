@@ -1,0 +1,30 @@
+import { router } from "./routes";
+import cors from 'cors';
+import express from "express"
+import { errorHandlerMiddleware } from "./middlewares/error-handler";
+import path from "path";
+
+
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use("/api", router)
+app.use(errorHandlerMiddleware)
+
+
+// caminho absoluto da pasta 'public'
+const publicPath = path.join(__dirname, "..", "src", "public");
+app.use(express.static(publicPath));
+
+// rota raiz → login
+app.get("/", (req, res) => {
+  res.sendFile(
+    path.join(publicPath, "telaLogin", "login.html")
+  );
+});
+
+
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`)
+})
