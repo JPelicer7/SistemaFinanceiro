@@ -21,6 +21,7 @@ model User {
   created_At DateTime @default(now())
   wallets Wallets[]
   categories Categories[]
+  transactions Transactions[]
 }
 
 model Wallets {
@@ -55,12 +56,14 @@ model Transactions {
   id Int @id @default(autoincrement())
   walletId Int
   categoryId Int
+  userId Int
   type CategoryType
-  amount Int
-  description String @db.VarChar(20)
+  amount Decimal
+  description String @db.VarChar(255)
   transaction_date DateTime @default(now())
-  balance_after Int
+  balance_after Decimal
 
+  user User @relation(fields: [userId], references: [id])
   wallets Wallets @relation(fields: [walletId], references: [id])
   categories Categories @relation(fields: [categoryId], references: [id])
 }
