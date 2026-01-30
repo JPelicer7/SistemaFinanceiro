@@ -48,4 +48,14 @@ export class CategoriesController {
         }
     }
 
+
+    findById: Handler = async(req, res, next) => {
+        try {
+            const id = req.params
+            const category = await this.CategoriesService.findById(+id)
+            res.json(category)
+        } catch (error) {
+            next(error)
+        }
+    }
 }

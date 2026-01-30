@@ -22,4 +22,10 @@ export class prismaCategoriesRepository implements CategoriesRepository {
             where: {id, userId}
         })
     }
+
+    async findById(id: number): Promise<Categories | null> {
+        return prisma.categories.findFirst({
+            where: {id}
+        })
+    }
 }

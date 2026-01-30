@@ -22,4 +22,11 @@ export class CategoriesService {
         return updatedCategory
     }
 
+
+    async findById(id: number) {
+        const category = await this.CategoriesRepository.findById(id)
+        if(!category) throw new HttpError(401, "Categoria Inexistente!")
+        return category
+    }
+
 }

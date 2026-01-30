@@ -3,6 +3,19 @@ import { CategoryType } from "@prisma/client";
 
 
 
+// export type CreateTransactionRepositoryInput = CreateTransactionsAttributes & {
+//   walletId: number
+//   balance_after: number
+// }
+
+export interface CreateTransactionsInput {
+  categoryId: number
+  type: CategoryType
+  amount: number
+  description: string
+}
+
+
 export interface CreateTransactionsAttributes {
     userId: number,
     walletId: number,

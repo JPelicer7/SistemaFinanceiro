@@ -8,5 +8,8 @@ export interface CreateWalletAttributes {
 
 
 export interface WalletRepository {
+    findById: (id: number) => Promise<Wallets | null>
+    findByUser: (userId: number) => Promise<Wallets | null>
     create: (attributes: CreateWalletAttributes) => Promise<Wallets>
+    updateBalance: (id: number, balance: number) => Promise<Wallets>
 }

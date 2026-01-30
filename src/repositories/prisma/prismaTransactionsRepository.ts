@@ -12,7 +12,8 @@ export class prismaTransactionsRepository implements TransactionsRepository {
 
     async create(attributes: CreateTransactionsAttributes): Promise<Transactions> {
         return prisma.transactions.create({
-            data: attributes
+            data: attributes,
+           
         })
     }
 

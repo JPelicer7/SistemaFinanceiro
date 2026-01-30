@@ -10,6 +10,10 @@ import { CategoriesController } from "./controller/CategoriesController"
 import { CategoriesService } from "./services/CategoriesService"
 import { prismaCategoriesRepository } from "./repositories/prisma/prismaCategoriesRepository"
 
+import { TransactionsController } from "./controller/TransactionsController"
+import { TransactionsService } from "./services/TransactionsService"
+import { prismaTransactionsRepository } from "./repositories/prisma/prismaTransactionsRepository"
+
 const router = Router()
 
 const userRepository = new prismaUserRepository()
@@ -21,6 +25,10 @@ const cateRepository = new prismaCategoriesRepository()
 const cateService = new CategoriesService(cateRepository)
 const cateController = new CategoriesController(cateService)
 
+const transRepository = new prismaTransactionsRepository()
+const transService = new TransactionsService(transRepository, WalletRepository, cateRepository)
+const transController = new TransactionsController(transService)
+
 // Rotas User
 router.get("/user/:id", ensureAuth, userController.findById)
 router.post("/register", userController.register)
@@ -30,5 +38,8 @@ router.post("/login", userController.login)
 router.post("/create/category", ensureAuth, cateController.create)
 router.put("/category/:id", ensureAuth, cateController.update)
 router.delete("/category/:id", ensureAuth, cateController.delete)
+
+//rotas Transactions
+router.post("/create/transa", ensureAuth, transController.create)
 
 export {router}
