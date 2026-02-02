@@ -28,4 +28,10 @@ export class prismaCategoriesRepository implements CategoriesRepository {
             where: {id}
         })
     }
+
+    async getAll(userId: number): Promise<Categories[]> {
+        return prisma.categories.findMany({
+            where : {userId}
+        })
+    }
 }

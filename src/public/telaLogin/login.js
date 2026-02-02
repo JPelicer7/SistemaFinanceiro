@@ -21,7 +21,6 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
-console.log("js rodando")
 
 form.addEventListener("submit", async(e) => {
     e.preventDefault()
@@ -45,7 +44,7 @@ form.addEventListener("submit", async(e) => {
 
             
             setTimeout(() => {
-                window.location.href = "/register/register.html";
+                window.location.href = "/telaInicial/telaInicial.html";
             }, 1000);
 
         } else {

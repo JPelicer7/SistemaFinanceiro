@@ -29,6 +29,8 @@ export interface CreateTransactionsAttributes {
 
 
 export interface TransactionsRepository {
+    getAll: (userId: number) => Promise<Transactions[]>
     findById: (id: number) => Promise<Transactions | null>
     create: (attributes: CreateTransactionsAttributes) => Promise<Transactions>
+    delete: (transactionId: number, userId: number) => Promise<Transactions | null>
 }   

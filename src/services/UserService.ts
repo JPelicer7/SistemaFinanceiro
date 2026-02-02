@@ -34,10 +34,13 @@ export class UserService {
         const user = await this.UserRepository.findByEmail(email)
         if(!user) throw new HttpError(401, "Usuário inexistente!")
         
+        //const wallet = await this.WalletRepository.findByUser(user.id)
+        //if(!wallet) throw new HttpError(401, "Não foi possível carregar a Wallet do Usuário!")
+        
         const validPassword = await argon2.verify(user.password, password)
         if(!validPassword) throw new HttpError(401, "Senha Inválida!")
 
-    
+            
         const payload = {id: user.id, email: user.email}
         const token = jwt.sign(payload, process.env.JWT_KEY!, {expiresIn: '1h'})
 

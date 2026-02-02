@@ -13,4 +13,5 @@ export interface CategoriesRepository {
     delete: (id: number, userId: number) => Promise<Categories | null>
     update: (id: number, userId: number, name: string) => Promise<Categories | null>
     findById: (id: number) => Promise<Categories | null>
+    getAll: (userId: number) => Promise<Categories[]>
 }

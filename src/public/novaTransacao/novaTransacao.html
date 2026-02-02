@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nova Transação</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Adicionar Transação</h1>
+      <button id="btnBack">← Voltar</button>
+    </header>
+
+    <form id="formTransaction">
+
+      <label>Categoria</label>
+      <select id="categorySelect" required>
+        <option value="">Carregando categorias...</option>
+      </select>
+
+      <label>Tipo</label>
+      <select id="typeSelect" required>
+        <option value="Receita">Receita</option>
+        <option value="Despesa">Despesa</option>
+      </select>
+
+      <label>Valor</label>
+      <input type="number" id="amount" step="0.01" placeholder="R$ 0,00" required />
+
+      <label>Descrição</label>
+      <input type="text" id="description" maxlength="255" placeholder="Ex: Mercado" required />
+
+      <button type="submit" class="btnPrimary">Salvar Transação</button>
+
+    </form>
+
+  </div>
+
+  <script src="/novaTransacao/novaTransacao.js"></script>
+</body>
+</html>

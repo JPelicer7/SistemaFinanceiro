@@ -22,4 +22,40 @@ export class TransactionsController {
         }
     }
 
+    delete: Handler = async(req, res, next) => {
+        try {
+           const transactionId = req.params.id 
+           const user = (req as any).user
+           const userId = user.id
+           const deletedTransaction = await this.TransactionsService.delete(+transactionId,userId)
+           
+            res.status(204).send()
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    findById: Handler = async(req, res, next) => {
+        try {
+            const id = req.params.id
+            const transaction = await this.TransactionsService.findById(+id)
+            res.json(transaction)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    getAll: Handler = async(req, res, next) => {
+        try {
+           const user = (req as any).user
+           const userId = user.id
+
+           const transactions = await this.TransactionsService.getAll(userId)
+           res.json(transactions)
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

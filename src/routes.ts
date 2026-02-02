@@ -35,11 +35,17 @@ router.post("/register", userController.register)
 router.post("/login", userController.login)
 
 //Rotas categorias
+router.get("/category", ensureAuth, cateController.getAll)
 router.post("/create/category", ensureAuth, cateController.create)
 router.put("/category/:id", ensureAuth, cateController.update)
 router.delete("/category/:id", ensureAuth, cateController.delete)
 
 //rotas Transactions
-router.post("/create/transa", ensureAuth, transController.create)
+router.get("/transactions", ensureAuth, transController.getAll)
+router.get("/transaction/:id", ensureAuth, transController.findById)
+router.post("/create/transaction", ensureAuth, transController.create)
+router.delete("/transaction/delete/:id", ensureAuth, transController.delete)
+
+
 
 export {router}

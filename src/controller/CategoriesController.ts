@@ -58,4 +58,17 @@ export class CategoriesController {
             next(error)
         }
     }
+
+    getAll: Handler = async(req, res, next) => {
+        try {
+            const user = (req as any).user
+            const userId = user.id
+
+            const categories = await this.CategoriesService.getAll(userId)
+            res.json(categories)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

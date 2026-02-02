@@ -4,6 +4,12 @@ import {prisma} from "../../database"
 
 export class prismaTransactionsRepository implements TransactionsRepository {
 
+    async getAll(userId: number): Promise<Transactions[]> {
+        return prisma.transactions.findMany({
+            where: {userId: userId}
+        })
+    }
+
     async findById(id: number): Promise<Transactions | null> {
         return prisma.transactions.findUnique({
             where: {id}
@@ -17,4 +23,9 @@ export class prismaTransactionsRepository implements TransactionsRepository {
         })
     }
 
+    async delete(transactionId: number, userId: number): Promise<Transactions | null> {
+        return prisma.transactions.delete({
+            where: {id: transactionId, userId: userId}
+        })
+    }
 }

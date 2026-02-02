@@ -8,6 +8,12 @@ import { CategoriesRepository } from "../repositories/CategoriesRepository";
 export class TransactionsService {
     constructor(private readonly TransactionsRepository: TransactionsRepository, private readonly WalletRepository: WalletRepository, private readonly CategoriesRepository: CategoriesRepository) {}
 
+    async getAll(userId: number) {
+        const transaction = await this.TransactionsRepository.getAll(userId)
+        if(!transaction) throw new HttpError(401, "Não foi possível carregar as transações do Usuário!")
+        return transaction
+    }
+
     async findById(id: number) {
         const transaction = await this.TransactionsRepository.findById(id)
         if(!transaction) throw new HttpError(401, "Não foi possível encontrar essa transação!")
@@ -39,7 +45,28 @@ export class TransactionsService {
         
         const newTransaction = await this.TransactionsRepository.create({...params, walletId: wallet.id, balance_after: +newBalance, userId})
         return newTransaction
+    }
+
+    async delete(transactionId: number, userId: number) {
+        const transaction = await this.TransactionsRepository.findById(transactionId)
+        if(!transaction) throw new HttpError(401, "Transação Inexistente!")
+
+        const wallet = await this.WalletRepository.findById(transaction.walletId)
+        if(!wallet) throw new HttpError(401, "Não foi possível recuperar os dados da carteira!")
         
+        let newBalance = new Prisma.Decimal(wallet.balance)
+        const amount = new Prisma.Decimal(transaction.amount)
+        
+        if(transaction.type === "Receita") {
+            newBalance = newBalance.minus(amount)
+        } else {
+            newBalance = newBalance.plus(amount)
+        }
+        
+        const updatedWallet = await this.WalletRepository.updateBalance(wallet.id, +newBalance)
+
+        const deletedTransaction = await this.TransactionsRepository.delete(transactionId, userId)
+        return deletedTransaction
     }
 
 }

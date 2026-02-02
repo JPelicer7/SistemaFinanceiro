@@ -29,4 +29,10 @@ export class CategoriesService {
         return category
     }
 
+    async getAll(userId: number) {
+        const categories = await this.CategoriesRepository.getAll(userId)
+        if(!categories) throw new HttpError(401, "Não foi possível carregar as Categorias do Usuário!")
+        return categories
+    }
+
 }
