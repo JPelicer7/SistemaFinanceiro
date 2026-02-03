@@ -28,4 +28,11 @@ export class prismaTransactionsRepository implements TransactionsRepository {
             where: {id: transactionId, userId: userId}
         })
     }
+
+    async update(transactionId: number, userId: number, attributes: Partial<CreateTransactionsAttributes>) {
+        return prisma.transactions.update({
+            where: {id: transactionId, userId},
+            data: attributes
+        })
+    }
 }

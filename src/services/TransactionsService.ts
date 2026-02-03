@@ -69,4 +69,35 @@ export class TransactionsService {
         return deletedTransaction
     }
 
+    async update(transactionId: number, userId: number, params: Partial<CreateTransactionsAttributes>) {
+        const transaction = await this.TransactionsRepository.findById(transactionId)
+        if(!transaction) throw new HttpError(401, "Não foi possível encontrar a transação!")
+
+        const wallet = await this.WalletRepository.findById(transaction.walletId)
+        if(!wallet) throw new HttpError(401, "Não foi possível encontrar a Wallet")
+
+        let balance = new Prisma.Decimal(wallet.balance)
+        const oldAmount = new Prisma.Decimal(transaction.amount)
+
+        if(transaction.type === "Receita") {
+            balance = balance.minus(oldAmount)
+        } else {
+            balance = balance.plus(oldAmount)
+        }
+
+         const newAmount = new Prisma.Decimal(params.amount ?? transaction.amount)
+         const newType = params.type ?? transaction.type
+
+         if (newType === "Receita") {
+            balance = balance.plus(newAmount)
+        } else {
+            balance = balance.minus(newAmount)
+        }
+
+        await this.WalletRepository.updateBalance(wallet.id, +balance)
+        
+        const newTransaction = await this.TransactionsRepository.update(transactionId, userId, params)
+        return newTransaction
+    }
+
 }

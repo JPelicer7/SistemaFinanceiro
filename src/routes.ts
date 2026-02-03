@@ -44,6 +44,7 @@ router.delete("/category/:id", ensureAuth, cateController.delete)
 router.get("/transactions", ensureAuth, transController.getAll)
 router.get("/transaction/:id", ensureAuth, transController.findById)
 router.post("/create/transaction", ensureAuth, transController.create)
+router.put("/transaction/update/:id", ensureAuth, transController.update)
 router.delete("/transaction/delete/:id", ensureAuth, transController.delete)
 
 

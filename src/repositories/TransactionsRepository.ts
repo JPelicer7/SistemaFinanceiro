@@ -33,4 +33,5 @@ export interface TransactionsRepository {
     findById: (id: number) => Promise<Transactions | null>
     create: (attributes: CreateTransactionsAttributes) => Promise<Transactions>
     delete: (transactionId: number, userId: number) => Promise<Transactions | null>
+    update: (transactionId: number, userId: number, attributes: Partial<CreateTransactionsAttributes>) => Promise<Transactions | null>
 }   

@@ -1,25 +1,44 @@
 const API_URL = "http://localhost:5000/api"
-console.log("JS carregado com sucesso")
-
 const token = localStorage.getItem("token")
-console.log("TOKEN:", token)
+
+
+function showConfirmToast(message, onConfirm) {
+  const toast = document.getElementById("confirmToast")
+
+  toast.innerHTML = `
+    <strong>${message}</strong>
+    <div class="actions">
+      <button class="btnCancel">Cancelar</button>
+      <button class="btnConfirm">Excluir</button>
+    </div>
+  `
+
+  toast.classList.add("show")
+
+  toast.querySelector(".btnCancel").onclick = () => {
+    toast.classList.remove("show")
+  }
+
+  toast.querySelector(".btnConfirm").onclick = () => {
+    toast.classList.remove("show")
+    onConfirm()
+  }
+}
+
+
 
 
 async function loadDashboard() {
-  console.log("loadDashboard foi chamada")
+  
   try {
-    console.log("loadDashboard foi chamada")
+    
     const response = await fetch(`${API_URL}/transactions`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log("STATUS:", response.status)
-
     const data = await response.json()
-
-    console.log("RETORNO API:", data)
 
     renderTransactions(data)
     calculateBalance(data)
@@ -77,14 +96,158 @@ function renderTransactions(transactions) {
   })
 }
 
-console.log("JS chegou ao fim do arquivo")
 
 document.getElementById("btnAddTransaction")
   .addEventListener("click", () => {
     window.location.href = "/novaTransacao/novaTransacao.html"
   })
 
+document.getElementById("btnAddCategory")
+  .addEventListener("click", () => {
+    window.location.href = "/categorias/categorias.html"
+  })
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM pronto — chamando loadDashboard")
   loadDashboard()
+})
+
+
+
+
+async function deleteTransaction(id) {
+  showConfirmToast("Deseja realmente excluir esta transação?", async () => {
+    
+    const token = localStorage.getItem("token")
+
+    try {
+      const res = await fetch(`${API_URL}/transaction/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      if (res.ok) {
+        showToast("Transação excluída com sucesso!", "success")
+        loadDashboard()
+      } else {
+        const data = await res.json()
+        showToast(data.message || "Erro ao excluir transação", "error")
+      }
+
+    } catch {
+      showToast("Erro ao conectar com o servidor", "error")
+    }
+  })
+}
+
+
+async function editTransaction(id) {
+  const token = localStorage.getItem("token")
+
+  try {
+    const res = await fetch(`${API_URL}/transaction/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    if (!res.ok) {
+      showConfirmToast("Erro ao carregar transação", "error")
+      return
+    }
+
+    const t = await res.json()
+
+    document.getElementById("edit-transaction-id").value = t.id
+    document.getElementById("edit-description").value = t.description
+    document.getElementById("edit-amount").value = t.amount
+    document.getElementById("edit-type").value = t.type
+
+    await loadCategories("edit-category", t.categoryId)
+
+    // Abre modal
+    document.getElementById("editModal").classList.remove("hidden")
+
+  } catch {
+    showConfirmToast("Erro ao buscar dados da transação", "error")
+  }
+}
+
+async function loadCategories(selectId, selectedId = null) {
+  const token = localStorage.getItem("token")
+
+  try {
+    const res = await fetch(`${API_URL}/category`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const categories = await res.json()
+    const select = document.getElementById(selectId)
+
+    select.innerHTML = ""
+
+    categories.forEach(cat => {
+      const option = document.createElement("option")
+      option.value = cat.id
+      option.textContent = cat.name
+
+      if (selectedId && cat.id === selectedId) {
+        option.selected = true
+      }
+
+      select.appendChild(option)
+    })
+
+  } catch {
+    showConfirmToast("Erro ao carregar categorias", "error")
+  }
+}
+
+
+
+document.getElementById("btnSaveEdit").addEventListener("click", async () => {
+  const id = document.getElementById("edit-transaction-id").value
+  const description = document.getElementById("edit-description").value
+  const amount = Number(document.getElementById("edit-amount").value)
+  const type = document.getElementById("edit-type").value
+  const categoryId = Number(document.getElementById("edit-category").value)
+
+  const token = localStorage.getItem("token")
+
+  try {
+    const res = await fetch(`${API_URL}/transaction/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        description,
+        amount,
+        type,
+        categoryId
+      })
+    })
+
+    if (res.ok) {
+      showConfirmToast("Transação atualizada!", "success")
+      document.getElementById("editModal").classList.add("hidden")
+      loadDashboard()
+    } else {
+      const data = await res.json()
+      showConfirmToast(data.message || "Erro ao atualizar", "error")
+    }
+
+  } catch {
+    showConfirmToast("Erro ao conectar com servidor", "error")
+  }
+})
+
+
+document.getElementById("btnCancelEdit").addEventListener("click", () => {
+  document.getElementById("editModal").classList.add("hidden")
 })

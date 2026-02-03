@@ -35,6 +35,20 @@ export class TransactionsController {
         }
     }
 
+    update: Handler = async(req, res, next) => {
+        try {
+            const user = (req as any).user
+            const userId = user.id
+            const transactionId = req.params.id
+
+            const body = createTransactionsRequestSchema.partial().parse(req.body)
+            const updatedTransaction = await this.TransactionsService.update(+transactionId, userId, body)
+            res.json(updatedTransaction)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     findById: Handler = async(req, res, next) => {
         try {
             const id = req.params.id
