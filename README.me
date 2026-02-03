@@ -1,0 +1,110 @@
+# 💰 Sistema Financeiro Pessoal
+
+Sistema Financeiro é uma aplicação web desenvolvida para controle de **receitas, despesas, categorias e saldo em carteira**, permitindo que cada usuário gerencie seus próprios dados de forma segura e organizada.
+
+O projeto foi desenvolvido com foco em **boas práticas de arquitetura**, separação de responsabilidades (Controller, Service, Repository), autenticação via JWT e integração completa entre **Back-end e Front-end**.
+
+---
+
+## 🚀 Funcionalidades
+
+### 👤 Autenticação
+
+* Cadastro de usuários
+* Login com geração de token JWT
+* Rotas protegidas para garantir acesso apenas ao usuário autenticado
+
+### 💼 Carteira (Wallet)
+
+* Criação automática de carteira para cada usuário
+* Controle de saldo em tempo real
+* Atualização automática do saldo ao criar, editar ou excluir transações
+
+### 🧾 Transações
+
+* Criar transações de **Receita** ou **Despesa**
+* Listar transações do usuário logado
+* Atualizar transações
+* Excluir transações
+* Cálculo automático do Saldo
+
+### 🗂️ Categorias
+
+* Criar categorias personalizadas
+* Cada usuário acessa apenas suas próprias categorias
+* Integração com transações
+
+### 🖥️ Front-end
+
+* Dashboard com saldo total
+* Lista dinâmica de transações
+* Modal para edição de transações
+* Tela para criação de categorias
+* Sistema de notificações (toast)
+* Integração total com a API
+
+---
+
+## 🧱 Arquitetura do Projeto
+
+O projeto segue uma estrutura baseada em camadas:
+
+```
+Controller → Service → Repository → Prisma → Banco de Dados
+```
+
+### 📦 Responsabilidades
+
+* **Controller**: recebe requisições HTTP e retorna respostas
+* **Service**: contém a regra de negócio
+* **Repository**: comunicação direta com o banco de dados
+* **Prisma**: ORM para manipulação dos dados
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### 🔹 Back-end
+
+* Node.js
+* TypeScript
+* Express
+* Prisma ORM
+* PostgreSQL
+* JWT (Autenticação)
+* Zod (Validação)
+* Argon2 (Hash de senha)
+
+### 🔹 Front-end
+
+* HTML5
+* CSS3
+* JavaScript (Vanilla)
+* Fetch API
+
+### 🔹 Ferramentas
+
+* Git & GitHub
+* Insomnia (Testes de API)
+* VS Code
+
+---
+
+## 🔐 Segurança
+
+* Autenticação via JWT
+* Usuários só acessam **suas próprias transações e categorias**
+* Validação de dados com Zod
+
+---
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como **prática avançada de back-end e front-end**, aplicando:
+
+* Arquitetura limpa
+* Boas práticas de segurança
+* Regras de negócio realistas
+* Integração completa entre API e interface
+
+---
