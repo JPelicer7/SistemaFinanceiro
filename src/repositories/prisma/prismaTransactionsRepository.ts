@@ -19,7 +19,6 @@ export class prismaTransactionsRepository implements TransactionsRepository {
     async create(attributes: CreateTransactionsAttributes): Promise<Transactions> {
         return prisma.transactions.create({
             data: attributes,
-           
         })
     }
 
@@ -29,10 +28,16 @@ export class prismaTransactionsRepository implements TransactionsRepository {
         })
     }
 
-    async update(transactionId: number, userId: number, attributes: Partial<CreateTransactionsAttributes>) {
+    async update(transactionId: number, userId: number, attributes: Partial<CreateTransactionsAttributes>): Promise<Transactions> {
         return prisma.transactions.update({
             where: {id: transactionId, userId},
             data: attributes
+        })
+    }
+
+    async deleteAll(userId: number): Promise<{count: number}> {
+        return prisma.transactions.deleteMany({
+            where: {userId}
         })
     }
 }

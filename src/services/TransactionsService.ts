@@ -100,4 +100,10 @@ export class TransactionsService {
         return newTransaction
     }
 
+    // async deleteAll(userId: number) {
+    //     const deletedTransactions = await this.TransactionsRepository.deleteAll(userId)
+    //     if(!deletedTransactions) throw new HttpError(401, "Não foi possível excluir as transações!")
+    //     return deletedTransactions
+    // }
+
 }

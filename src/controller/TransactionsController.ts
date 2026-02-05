@@ -72,4 +72,16 @@ export class TransactionsController {
         }
     }
 
+    // deleteAll: Handler = async(req, res, next) => {
+    //     try {
+    //         const user = (req as any).user
+    //         const userId = user.id
+
+    //         const deletedTransactions = await this.TransactionsService.deleteAll(userId)
+    //         res.json(deletedTransactions)
+    //     } catch (error) {
+    //         next(error)
+    //     }
+    // }
+
 }

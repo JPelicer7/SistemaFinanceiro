@@ -22,6 +22,7 @@ model User {
   wallets Wallets[]
   categories Categories[]
   transactions Transactions[]
+  MonthlySummary MonthlySummary[]
 }
 
 model Wallets {
@@ -68,3 +69,16 @@ model Transactions {
   categories Categories @relation(fields: [categoryId], references: [id])
 }
 
+
+model MonthlySummary {
+  id Int @id @default(autoincrement())
+  userId Int
+  month Int
+  year Int
+  totalReceita Decimal
+  totalDespesa Decimal
+  totalBalance Decimal
+  created_At DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id])
+}

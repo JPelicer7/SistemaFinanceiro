@@ -34,4 +34,5 @@ export interface TransactionsRepository {
     create: (attributes: CreateTransactionsAttributes) => Promise<Transactions>
     delete: (transactionId: number, userId: number) => Promise<Transactions | null>
     update: (transactionId: number, userId: number, attributes: Partial<CreateTransactionsAttributes>) => Promise<Transactions | null>
+    deleteAll: (userId: number) => Promise<{ count: number}>
 }   

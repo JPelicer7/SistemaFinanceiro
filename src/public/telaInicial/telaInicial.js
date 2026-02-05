@@ -26,42 +26,70 @@ function showConfirmToast(message, onConfirm) {
 }
 
 
-
-
 async function loadDashboard() {
-  
   try {
-    
-    const response = await fetch(`${API_URL}/transactions`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const [transactionsResponse, walletResponse] = await Promise.all([
+      fetch(`${API_URL}/transactions`, {
+        headers: { Authorization: `Bearer ${token}` }
+      }),
+      fetch(`${API_URL}/wallet`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    ])
 
-    const data = await response.json()
+    const transactions = await transactionsResponse.json()
+    const wallet = await walletResponse.json()
 
-    renderTransactions(data)
-    calculateBalance(data)
+    renderTransactions(transactions)
+    renderBalance(wallet.balance)
 
   } catch (error) {
-    console.error("Erro ao carregar transações:", error)
+    console.error("Erro ao carregar dashboard:", error)
   }
 }
 
-function calculateBalance(transactions) {
-  let balance = 0
 
-  transactions.forEach(t => {
-    if (t.type === "Receita") {
-      balance += Number(t.amount)
-    } else {
-      balance -= Number(t.amount)
-    }
-  })
 
-  document.getElementById("balance").innerText =
-    `Saldo: R$ ${balance.toFixed(2)}`
-}
+
+
+
+
+
+
+// async function loadDashboard() {
+  
+//   try {
+    
+//     const response = await fetch(`${API_URL}/transactions`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     })
+
+//     const data = await response.json()
+
+//     renderTransactions(data)
+//     calculateBalance(data)
+
+//   } catch (error) {
+//     console.error("Erro ao carregar transações:", error)
+//   }
+// }
+
+// function calculateBalance(transactions) {
+//   let balance = 0
+
+//   transactions.forEach(t => {
+//     if (t.type === "Receita") {
+//       balance += Number(t.amount)
+//     } else {
+//       balance -= Number(t.amount)
+//     }
+//   })
+
+//   document.getElementById("balance").innerText =
+//     `Saldo: R$ ${balance.toFixed(2)}`
+// }
 
 function renderTransactions(transactions) {
   const list = document.getElementById("transactions-list")
@@ -96,6 +124,12 @@ function renderTransactions(transactions) {
   })
 }
 
+function renderBalance(balance) {
+  document.getElementById("balance").innerText =
+    `Saldo: R$ ${Number(balance).toFixed(2)}`
+}
+
+
 
 document.getElementById("btnAddTransaction")
   .addEventListener("click", () => {
@@ -113,6 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
+function goToSummaryHistory() {
+  window.location.href = "/sumario/sumario.html"
+}
 
 
 async function deleteTransaction(id) {
@@ -251,3 +288,40 @@ document.getElementById("btnSaveEdit").addEventListener("click", async () => {
 document.getElementById("btnCancelEdit").addEventListener("click", () => {
   document.getElementById("editModal").classList.add("hidden")
 })
+
+
+
+document.getElementById("btnGenerateSummary")
+  .addEventListener("click", generateMonthlySummary)
+
+async function generateMonthlySummary() {
+  const token = localStorage.getItem("token")
+
+  try {
+    const res = await fetch(`${API_URL}/create/summary`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      return showConfirmToast(data.message || "Erro ao gerar histórico", "error")
+    }
+
+    showConfirmToast("📊 Histórico mensal gerado com sucesso!", "success")
+
+    // Atualiza saldo e transações após gerar histórico
+    loadDashboard()
+
+    // Opcional: redirecionar para histórico
+    setTimeout(() => {
+      window.location.href = "/sumario/sumario.html"
+    }, 1200)
+
+  } catch {
+    showConfirmToast("Erro ao conectar com o servidor", "error")
+  }
+}

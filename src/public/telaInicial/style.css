@@ -113,6 +113,18 @@ button {
   margin: 1rem 0;
 }
 
+#btnAddSummary {
+  background-color: #4f46e5;
+  color: #fff;
+  margin: 1rem 0;
+}
+
+#btnGenerateSummary {
+  background-color: #4f46e5;
+  color: #fff;
+  margin: 1rem 0;
+}
+
 .edit {
   background: #e0e7ff;
   color: #3730a3;
@@ -135,6 +147,7 @@ button {
   margin-left: 5px;
   cursor: pointer;
 }
+
 
 
 
