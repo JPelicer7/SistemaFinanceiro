@@ -100,6 +100,26 @@ function showConfirmToast(message, onConfirm) {
   }
 }
 
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+
+ 
+  if (!toast) {
+    const newToast = document.createElement("div");
+    newToast.id = "toast";
+    newToast.className = "toast";
+    document.body.appendChild(newToast);
+  }
+
+  const t = document.getElementById("toast");
+  t.textContent = message;
+  t.className = `toast show ${type}`;
+
+  setTimeout(() => {
+    t.className = "toast";
+  }, 3000);
+}
+
 
 
 
@@ -180,15 +200,15 @@ async function deleteSummary(id) {
       })
 
       if (res.ok) {
-        showConfirmToast("Registro excluído com sucesso!", "success")
+        showToast("Registro excluído com sucesso!", "success")
         loadSummaries()
       } else {
         const data = await res.json()
-        showConfirmToast(data.message || "Erro ao excluir registro", "error")
+        showToast(data.message || "Erro ao excluir registro", "error")
       }
 
     } catch {
-      showConfirmToast("Erro ao conectar com o servidor", "error")
+      showToast("Erro ao conectar com o servidor", "error")
     }
   })
 }

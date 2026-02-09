@@ -8,11 +8,15 @@
 </head>
 <body>
     <main>
-        <section class="Categorias">
-            <h1>Crie uma nova Categoria</h1>
+        <section class="categorias">
+            <div class="card-header">
+                <button onclick="goBack()" class="back-btn">⬅ Voltar</button>
+            </div>
 
+
+            <h1>Crie uma nova Categoria</h1>
             <form id="formCategoria">
-                <input type="text" id="name" placeholder="Name" required>
+                <input type="text" id="name" placeholder="Ex: lazer, gasolina" required>
                 <button type="submit">Cadastrar</button>
             </form>
 

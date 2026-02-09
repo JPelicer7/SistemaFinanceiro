@@ -1,5 +1,5 @@
 import { HttpError } from "../error/HttpError";
-import { SummaryRepository, CreateSummaryAttributes } from "../repositories/SummaryRepository";
+import { SummaryRepository } from "../repositories/SummaryRepository";
 import { Prisma } from "@prisma/client";
 import { TransactionsRepository } from "../repositories/TransactionsRepository";
 import { WalletRepository } from "../repositories/WalletRepository";
@@ -58,4 +58,6 @@ export class SummaryService {
         const deletedSummary = await this.SummaryRepository.delete(id, userId)
         return deletedSummary
     }
+
+    
 }

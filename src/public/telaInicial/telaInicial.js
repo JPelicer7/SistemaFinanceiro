@@ -25,6 +25,26 @@ function showConfirmToast(message, onConfirm) {
   }
 }
 
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+
+ 
+  if (!toast) {
+    const newToast = document.createElement("div");
+    newToast.id = "toast";
+    newToast.className = "toast";
+    document.body.appendChild(newToast);
+  }
+
+  const t = document.getElementById("toast");
+  t.textContent = message;
+  t.className = `toast show ${type}`;
+
+  setTimeout(() => {
+    t.className = "toast";
+  }, 3000);
+}
+
 
 async function loadDashboard() {
   try {
@@ -47,9 +67,6 @@ async function loadDashboard() {
     console.error("Erro ao carregar dashboard:", error)
   }
 }
-
-
-
 
 
 
@@ -271,12 +288,12 @@ document.getElementById("btnSaveEdit").addEventListener("click", async () => {
     })
 
     if (res.ok) {
-      showConfirmToast("Transação atualizada!", "success")
+      showToast("Transação atualizada!", "success")
       document.getElementById("editModal").classList.add("hidden")
       loadDashboard()
     } else {
       const data = await res.json()
-      showConfirmToast(data.message || "Erro ao atualizar", "error")
+      showToast(data.message || "Erro ao atualizar", "error")
     }
 
   } catch {
@@ -311,7 +328,7 @@ async function generateMonthlySummary() {
       return showConfirmToast(data.message || "Erro ao gerar histórico", "error")
     }
 
-    showConfirmToast("📊 Histórico mensal gerado com sucesso!", "success")
+    showToast("📊 Histórico mensal gerado com sucesso!", "success")
 
     // Atualiza saldo e transações após gerar histórico
     loadDashboard()

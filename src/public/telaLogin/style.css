@@ -53,6 +53,7 @@ main {
     border-radius: 10px;
     margin: auto;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 10px 20px;
     color: #ffffff;
 }
@@ -62,6 +63,7 @@ main {
   color: #ffffff;
   transition: 0.3s;
 }
+
 
 
 h1 {

@@ -57,6 +57,9 @@ form.addEventListener("submit", async(e) => {
         console.error("Erro de conexão:", error);
         alert("Erro de conexão com o servidor.");
     }
-
-
 })
+
+
+function goBack() {
+  window.location.href = "/telaInicial/telaInicial.html"
+}

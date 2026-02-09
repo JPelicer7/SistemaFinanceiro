@@ -21,7 +21,7 @@ main {
 
 }
 
-.categorias {
+/* .categorias {
     background: rgba(44, 44, 44);
     margin: auto;
     place-content: center;
@@ -30,6 +30,41 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: white; 
     border-radius: 10px;
+} */
+
+
+.categorias {
+  background: rgba(44, 44, 44);
+  margin: auto;
+  padding: 24px;
+  width: 400px;
+  min-height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.back-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #1e4fd6;
+  transform: translateX(-2px);
+}
+.card-header {
+  display: flex;
+  justify-content: flex-start;
 }
 
 
