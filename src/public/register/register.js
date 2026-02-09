@@ -1,4 +1,5 @@
 const form = document.getElementById("formRegister");
+const API_URL = "/api"
 
 // --- Função de notificação (toast) ---
 function showToast(message, type = "success") {
@@ -31,7 +32,7 @@ form.addEventListener("submit", async(e) => {
 
     try {
 
-        const res = await fetch("http://localhost:5000/api/register", {
+        const res = await fetch(`${API_URL}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password  }),

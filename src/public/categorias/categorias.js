@@ -1,5 +1,7 @@
 const form = document.getElementById("formCategoria");
 const token = localStorage.getItem("token")
+const API_URL = "/api"
+
 
 // --- Função de notificação (toast) ---
 function showToast(message, type = "success") {
@@ -29,8 +31,8 @@ form.addEventListener("submit", async(e) => {
     const name = document.getElementById("name").value;
 
     try {
-
-        const res = await fetch("http://localhost:5000/api/create/category", {
+                               
+        const res = await fetch(`${API_URL}/create/category`, {
             method: "POST",
             headers: { "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`
