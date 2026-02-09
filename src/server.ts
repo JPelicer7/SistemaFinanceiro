@@ -63,11 +63,10 @@ app.use(express.static(publicPath))
 app.use("/api", router)
 
 // fallback SPA → login
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(publicPath, "telaLogin", "login.html")
-  )
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(publicPath, "telaLogin", "login.html"))
 })
+
 
 // middleware de erro
 app.use(errorHandlerMiddleware)
