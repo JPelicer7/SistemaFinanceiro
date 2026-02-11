@@ -217,3 +217,86 @@ body {
 
 .toast.success { border-left: 4px solid #22c55e; }
 .toast.error { border-left: 4px solid #ef4444; }
+
+
+#confirmToast {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+#confirmToast.show {
+  display: block;
+}
+
+.confirm-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-box {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 14px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  animation: fadeInScale .15s ease;
+}
+
+.confirm-box strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.actionsConfirm {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.actionsConfirm .btnCancel {
+  background: #e5e7eb;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.actionsConfirm .btnConfirm {
+  background: #ef4444;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+#btnDeleteSummary {
+  background: #f92525;
+  padding: 5px 1rem;
+  border-radius: 10px;
+  color: #fff;
+}
+
+#btnDeleteSummary:hover {
+  background: #e87c7c;
+}

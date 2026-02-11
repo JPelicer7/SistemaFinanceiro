@@ -4,47 +4,61 @@
     box-sizing: border-box;
 }
 
-main {
-    width: 100vw;
-    height: 100vh;
-    place-content: center;
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat;
+/* Toast */
 
-    background: linear-gradient(
-        90deg,
-        #000000 0%,
-        #0a3cff 50%,
-        #000000 100%
-    );
-
+.toast {
+  color: #fff;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #111827;
+  padding: 12px 18px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s;
 }
 
-/* .categorias {
-    background: rgba(44, 44, 44);
-    margin: auto;
-    place-content: center;
-    width: 400px;
-    min-height: 400px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: white; 
-    border-radius: 10px;
-} */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+.toast.success { border-left: 4px solid #22c55e; }
+.toast.error { border-left: 4px solid #ef4444; }
+
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 .categorias {
-  background: rgba(44, 44, 44);
-  margin: auto;
-  padding: 24px;
-  width: 400px;
-  min-height: 300px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: white;
-  border-radius: 12px;
+  background: white;
+  width: 420px;
+  padding: 26px 28px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  text-align: center;
+  position: relative;
+}
+
+/* Header */
+.card-header {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 }
 
 .back-btn {
@@ -52,98 +66,70 @@ main {
   background: #2563eb;
   color: white;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
-  transition: 0.2s ease;
+  transition: background .15s ease, transform .05s ease;
 }
 
 .back-btn:hover {
-  background: #1e4fd6;
-  transform: translateX(-2px);
-}
-.card-header {
-  display: flex;
-  justify-content: flex-start;
+  background: #1e40af;
+  transform: translateY(-1px);
 }
 
-
-#formCategoria {
-    display: flex;
-    flex-direction: column;
-}
-
-#formCategoria input {
-    min-width: 250px;
-    margin: auto;
-    margin-bottom: 1rem;
-    border-radius: 20px;
-    padding: 8px 10px;
-    border: 1px solid #000000;
-}
-
-#formCategoria button {
-    min-width: 300px;
-    background-color: #1717a8;
-    border-radius: 10px;
-    margin: auto;
-    margin-top: 1rem;
-    padding: 10px 20px;
-    color: #ffffff;
-}
-
-#formCategoria button:hover {
-  background-color: #8380d950;
-  color: #ffffff;
-  transition: 0.3s;
-}
-
-
+/* Title */
 h1 {
-    margin-bottom: 2rem;
-    color: #ffffff;
-    text-align: center;
+  margin-top: 8px;
+  font-size: 22px;
 }
 
-
-p {
-    text-align: center;
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 18px;
 }
 
-p a {
-    color: #ffffff;
-    text-decoration: none;
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
 }
 
-
-
-
-
-.toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 8px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .4s ease, transform .4s ease;
-    font-size: 14px;
-    z-index: 9999;
+label {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.toast.show {
-  opacity: 1;
-  pointer-events: auto;
+input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  transition: border .15s ease, box-shadow .15s ease;
 }
 
-
-.toast.success {
-    background: #4caf50;
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
 }
 
-.toast.error {
-    background: #e74c3c;
+/* Button */
+button[type="submit"] {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .15s ease;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37,99,235,0.35);
 }

@@ -5,12 +5,17 @@ const token = localStorage.getItem("token")
 
 function showConfirmToast(message, onConfirm) {
   const toast = document.getElementById("confirmToast")
-
+  toast.style.color = "black"
   toast.innerHTML = `
-    <strong>${message}</strong>
-    <div class="actions">
-      <button class="btnCancel">Cancelar</button>
-      <button class="btnConfirm">Excluir</button>
+    <div class="confirm-overlay">
+      <div class="confirm-box">
+        <strong>${message}</strong>
+
+        <div class="actionsConfirm">
+          <button class="btnCancel">Cancelar</button>
+          <button class="btnConfirm">Excluir</button>
+        </div>
+      </div>
     </div>
   `
 
@@ -69,45 +74,6 @@ async function loadDashboard() {
   }
 }
 
-
-
-
-
-
-// async function loadDashboard() {
-  
-//   try {
-    
-//     const response = await fetch(`${API_URL}/transactions`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     })
-
-//     const data = await response.json()
-
-//     renderTransactions(data)
-//     calculateBalance(data)
-
-//   } catch (error) {
-//     console.error("Erro ao carregar transações:", error)
-//   }
-// }
-
-// function calculateBalance(transactions) {
-//   let balance = 0
-
-//   transactions.forEach(t => {
-//     if (t.type === "Receita") {
-//       balance += Number(t.amount)
-//     } else {
-//       balance -= Number(t.amount)
-//     }
-//   })
-
-//   document.getElementById("balance").innerText =
-//     `Saldo: R$ ${balance.toFixed(2)}`
-// }
 
 function renderTransactions(transactions) {
   const list = document.getElementById("transactions-list")

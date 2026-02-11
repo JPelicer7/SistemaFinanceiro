@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<!-- <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <title>Histórico Financeiro</title>
@@ -13,6 +13,34 @@
       <div id="confirmToast" class="confirm-toast hidden"></div>
       <h2>📊 Histórico Mensal</h2>
       <button onclick="goBack()" class="back-btn">⬅ Voltar</button>
+    </header>
+
+    <div id="summary-list" class="summary-list"></div>
+
+  </div>
+
+  <script src="/sumario/sumario.js"></script>
+</body>
+</html> -->
+
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Histórico Financeiro</title>
+  <link rel="stylesheet" href="/sumario/style.css"/>
+</head>
+<body>
+
+  <div class="container">
+
+    <header class="header">
+      <div class="header-left">
+        <button onclick="goBack()" class="back-btn">⬅ Voltar</button>
+      </div>
+
+      <h2>📊 Histórico Mensal</h2>
+
+      <div id="confirmToast" class="confirm-toast hidden"></div>
     </header>
 
     <div id="summary-list" class="summary-list"></div>

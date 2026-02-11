@@ -1,8 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6fa;
+  background: linear-gradient(60deg, #0f172a, #1e293b);
   margin: 0;
-}
+} 
 
 .container {
   max-width: 900px;
@@ -17,6 +17,10 @@ body {
   margin-bottom: 20px;
 }
 
+h2 {
+  color: #fff;
+}
+
 .back-btn {
   border: none;
   background: #2563eb;
@@ -24,7 +28,16 @@ body {
   padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .15s ease, transform .05s ease;
 }
+
+.back-btn:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
 
 .summary-list {
   display: flex;
@@ -34,7 +47,7 @@ body {
 
 /* Card azul */
 .summary-card {
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  background: linear-gradient(135deg, #0b2151, #3b82f6);
   color: white;
   padding: 16px 18px;
   border-radius: 16px;
@@ -60,7 +73,7 @@ body {
   display: none;
   font-size: 14px;
   opacity: 0.95;
-}
+} 
 
 
 #confirmToast {
@@ -135,15 +148,17 @@ body {
 
 
 #btnDeleteSummary {
-  background: #f92525;
+  background: linear-gradient(135deg, #f92525, #e26254);
+  /* background: #f92525; */
   padding: 5px 1rem;
   border-radius: 10px;
   color: #fff;
+  font-weight: 500;
 }
 
 #btnDeleteSummary:hover {
   background: #e87c7c;
-}
+} 
 
 
 .toast {

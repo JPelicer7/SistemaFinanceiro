@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,5 +23,40 @@
         </section>
     </main>
     <script src="/categorias/categorias.js"></script>
+</body>
+</html> -->
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/categorias/style.css">
+  <title>Categorias</title>
+</head>
+<body>
+
+  <main class="page">
+
+    <section class="categorias">
+
+      <div class="card-header">
+        <button onclick="goBack()" class="back-btn">⬅ Voltar</button>
+      </div>
+
+      <h1>Nova Categoria</h1>
+      <p class="subtitle">Crie categorias para organizar suas receitas e despesas</p>
+
+      <form id="formCategoria">
+        <label for="name">Nome da Categoria</label>
+        <input type="text" id="name" placeholder="Ex: Lazer, Gasolina, Alimentação" required>
+
+        <button type="submit">Cadastrar Categoria</button>
+      </form>
+
+    </section>
+
+  </main>
+
+  <script src="/categorias/categorias.js"></script>
 </body>
 </html>
