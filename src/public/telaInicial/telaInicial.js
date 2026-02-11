@@ -121,22 +121,22 @@ function renderTransactions(transactions) {
     const color = isIncome ? "green" : "red"
 
     li.innerHTML = `
-      <div class="transaction">
-        <div>
-          <strong>${t.description}</strong><br>
-          <small>${t.type}</small>
-        </div>
+  <div class="transaction">
+    <div class="transaction-info">
+      <strong>${t.description}</strong>
+      <small>${t.type}</small>
+    </div>
 
-        <div style="color:${color}">
-          ${sign} R$ ${Number(t.amount).toFixed(2)}
-        </div>
+    <div class="transaction-amount" style="color:${color}">
+      ${sign} R$ ${Number(t.amount).toFixed(2)}
+    </div>
 
-        <div class="actions">
-          <button onclick="editTransaction(${t.id})">Editar</button>
-          <button onclick="deleteTransaction(${t.id})">Excluir</button>
-        </div>
-      </div>
-    `
+    <div class="transaction-actions">
+      <button onclick="editTransaction(${t.id})" class="btn-edit">✏️</button>
+      <button onclick="deleteTransaction(${t.id})" class="btn-delete">🗑️</button>
+    </div>
+  </div>
+`
 
     list.appendChild(li)
   })

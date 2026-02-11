@@ -1,4 +1,4 @@
-const form = document.getElementById("formRegister");
+const form = document.getElementById("registerForm");
 const API_URL = "/api"
 
 // --- Função de notificação (toast) ---

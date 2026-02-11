@@ -1,47 +1,89 @@
+
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f4f6fb;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
 }
 
 .container {
   max-width: 900px;
-  margin: 30px auto;
+  margin: auto;
   padding: 20px;
 }
 
-.header h1 {
+/* Header */
+
+.header {
+  text-align: center;
   margin-bottom: 20px;
-  color: #333;
 }
 
+.header h1 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Balance Card */
+
 .balance-card {
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: white;
-  padding: 25px;
-  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
   margin-bottom: 25px;
+  backdrop-filter: blur(8px);
 }
 
 .balance-card p {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.9;
+  opacity: 0.7;
+  margin-bottom: 6px;
 }
 
 .balance-card h2 {
-  margin-top: 5px;
   font-size: 28px;
+  font-weight: bold;
 }
 
-.transactions h3 {
-  margin-bottom: 12px;
-  color: #333;
+/* Transactions */
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+/* Action Buttons */
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 15px 0 20px;
+}
+
+.actions button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background: #1e4fd8;
+  transform: translateY(-1px);
+}
+
+/* Transaction List */
 
 .transaction-list {
   list-style: none;
@@ -49,199 +91,16 @@ body {
   margin: 0;
 }
 
-.transaction {
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-.transaction .info {
-  display: flex;
-  flex-direction: column;
-}
-
-.transaction .title {
-  font-weight: 600;
-  color: #222;
-}
-
-.transaction .type {
-  font-size: 13px;
-  color: #666;
-}
-
-.transaction .value {
-  font-weight: 700;
-}
-
-.transaction.income .value {
-  color: #16a34a;
-}
-
-.transaction.expense .value {
-  color: #dc2626;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-}
-
-button {
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-#btnAddTransaction {
-  background-color: #4f46e5;
-  color: #fff;
-  margin: 1rem 0;
-}
-
-
-#btnAddCategory {
-  background-color: #4f46e5;
-  color: #fff;
-  margin: 1rem 0;
-}
-
-#btnAddSummary {
-  background-color: #4f46e5;
-  color: #fff;
-  margin: 1rem 0;
-}
-
-#btnGenerateSummary {
-  background-color: #4f46e5;
-  color: #fff;
-  margin: 1rem 0;
-}
-
-.edit {
-  background: #e0e7ff;
-  color: #3730a3;
-}
-
-.delete {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-
-.transaction {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-}
-
-.actions button {
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-
-
-
-.confirm-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #111827;
-  color: white;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.4);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 280px;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: .25s ease;
-  z-index: 9999;
-}
-
-.confirm-toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.confirm-toast .actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.confirm-toast button {
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.confirm-toast .btnCancel {
-  background: #374151;
-  color: white;
-}
-
-.confirm-toast .btnConfirm {
-  background: #dc2626;
-  color: white;
-}
-
-.toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 8px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .4s ease, transform .4s ease;
-    font-size: 14px;
-    z-index: 9999;
-}
-
-.toast.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-.toast.success {
-    background: #4caf50;
-}
-
-.toast.error {
-    background: #e74c3c;
-}
-
-
-
+/* Modal */
 
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 999;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
 }
 
 .modal.hidden {
@@ -249,49 +108,112 @@ button {
 }
 
 .modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
+  background: #0f172a;
+  border-radius: 16px;
+  padding: 24px;
   width: 100%;
-  max-width: 420px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  animation: fadeIn .2s ease;
-}
-
-.modal-content label {
-  display: block;
-  margin-top: 10px;
-  font-size: 14px;
+  max-width: 400px;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .modal-content input,
 .modal-content select {
   width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
 }
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
   gap: 10px;
-  margin-top: 15px;
 }
 
 .modal-actions button {
-  padding: 8px 14px;
-  border-radius: 6px;
+  flex: 1;
+}
+
+
+.transaction {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: 0.2s;
+}
+
+.transaction:hover {
+  background: rgba(255,255,255,0.09);
+}
+
+.transaction-info strong {
+  display: block;
+  font-size: 15px;
+}
+
+.transaction-info small {
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* Botões inline compactos */
+.transaction-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.transaction-actions button {
   border: none;
-  cursor: pointer;
-}
-
-#btnSaveEdit {
-  background: #4CAF50;
+  background: rgba(255,255,255,0.12);
   color: white;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.15s;
 }
 
-#btnCancelEdit {
-  background: #ccc;
+.transaction-actions button:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.05);
 }
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+
+/* Toast */
+
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #111827;
+  padding: 12px 18px;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success { border-left: 4px solid #22c55e; }
+.toast.error { border-left: 4px solid #ef4444; }

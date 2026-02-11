@@ -1,4 +1,4 @@
-const form = document.getElementById("formLogin");
+const form = document.getElementById("loginForm");
 
 // --- Função de notificação (toast) ---
 function showToast(message, type = "success") {
@@ -55,6 +55,4 @@ form.addEventListener("submit", async(e) => {
         console.error("Erro de conexão:", error);
         alert("Erro de conexão com o servidor.");
     }
-
-
 })
