@@ -63,11 +63,15 @@ async function loadDashboard() {
       })
     ])
 
-    const transactions = await transactionsResponse.json()
+    // const transactions = await transactionsResponse.json()
+    const data = await transactionsResponse.json()
     const wallet = await walletResponse.json()
 
-    renderTransactions(transactions)
+    renderTransactions(data.transactions)
     renderBalance(wallet.balance)
+
+    renderIncome(data.summary.income)
+    renderExpenses(data.summary.expenses)
 
   } catch (error) {
     console.error("Erro ao carregar dashboard:", error)
@@ -273,8 +277,6 @@ document.getElementById("btnCancelEdit").addEventListener("click", () => {
   document.getElementById("editModal").classList.add("hidden")
 })
 
-
-
 document.getElementById("btnGenerateSummary")
   .addEventListener("click", generateMonthlySummary)
 
@@ -307,5 +309,21 @@ async function generateMonthlySummary() {
 
   } catch {
     showConfirmToast("Erro ao conectar com o servidor", "error")
+  }
+}
+
+
+
+function renderIncome(income) {
+  const el = document.getElementById("income")
+  if (el) {
+    el.innerText = `R$ ${Number(income).toFixed(2)}`
+  }
+}
+
+function renderExpenses(expenses) {
+  const el = document.getElementById("expenses")
+  if (el) {
+    el.innerText = `R$ ${Number(expenses).toFixed(2)}`
   }
 }

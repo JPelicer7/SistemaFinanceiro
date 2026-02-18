@@ -50,6 +50,54 @@ body {
   font-weight: bold;
 }
 
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.card {
+  padding: 18px;
+  border-radius: 14px;
+  color: white;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.card h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* cores */
+
+.card.balance {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.card.income {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.card.expenses {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+
+
+
+
+
+
+
+
 /* Transactions */
 
 .transactions-header {

@@ -11,9 +11,28 @@ export class TransactionsService {
     constructor(private readonly TransactionsRepository: TransactionsRepository, private readonly WalletRepository: WalletRepository, private readonly CategoriesRepository: CategoriesRepository) {}
 
     async getAll(userId: number) {
-        const transaction = await this.TransactionsRepository.getAll(userId)
-        if(!transaction) throw new HttpError(401, "Não foi possível carregar as transações do Usuário!")
-        return transaction
+        const transactions = await this.TransactionsRepository.getAll(userId)
+        if(!transactions) throw new HttpError(401, "Não foi possível carregar as transações do Usuário!")
+
+        let income = new Prisma.Decimal(0)
+        let expenses = new Prisma.Decimal(0)
+        
+
+        transactions.forEach(t => {
+            const amount = new Prisma.Decimal(t.amount)
+            if (t.type === "Receita") {
+                income = income.plus(amount)
+            } else {
+                expenses = expenses.plus(amount)
+            }
+        })
+
+        return {transactions,
+            summary: {
+                income,
+                expenses
+            }
+        }
     }
 
     async findById(id: number) {
